@@ -12,8 +12,8 @@ const Home = () => {
         <ScrollView horizontal={true} snapToInterval={width} decelerationRate="fast" snapToAlignment="end" style={styles.scroll}>
           {receipts.map((x, i) => {
             return (
-              <View style={{justifyContent: 'center'}}>
-                <View style={styles.listItem} key={i}>
+              <View style={{justifyContent: 'center'}} key={i}>
+                <View style={styles.listItem}>
                   <Receipt receipt={x} />
                 </View>
               </View>
