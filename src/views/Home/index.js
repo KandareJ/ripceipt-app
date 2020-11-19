@@ -1,28 +1,43 @@
 import React from 'react';
 import { Text, View, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
 import Receipt from './Receipt';
 
 const { height, width } = Dimensions.get('window');
 
-const Home = () => {
+const Home = ({ receipts }) => {
   return (
     <SafeAreaView>
       <View style={styles.fill}>
         <ScrollView horizontal={true} snapToInterval={width} decelerationRate="fast" snapToAlignment="end" style={styles.scroll}>
-          {receipts.map((x, i) => {
-            return (
-              <View style={{justifyContent: 'center'}} key={i}>
-                <View style={styles.listItem}>
-                  <Receipt receipt={x} />
-                </View>
-              </View>
-            );
-          })}
+          {body(receipts)}
         </ScrollView>
       </View>
     </SafeAreaView>
   );
+}
+
+const body = (receipts) => {
+  if (receipts.length === 0) {
+    return (
+      <View style={{justifyContent: 'center'}}>
+        <Text>You have no receipts to show</Text>
+      </View>
+    );
+  }
+  
+  else {
+    return receipts.map((x, i) => {
+      return (
+        <View style={{justifyContent: 'center'}} key={i}>
+          <View style={styles.listItem}>
+            <Receipt receipt={x} />
+          </View>
+        </View>
+      );
+    });
+  }
 }
 
 const styles = StyleSheet.create({
@@ -40,16 +55,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const receipts = [
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
-  },
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
-  },
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
-  }
-];
+const mapStateToProps = (state) => {
+  return {
+    receipts: state.receipts
+  };
+}
 
-export default Home;
+export default connect(mapStateToProps)(Home);

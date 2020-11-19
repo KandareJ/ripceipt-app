@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
+import { connect } from 'react-redux';
 
-const Stats = () => {
+const Stats = ({ receipts }) => {
   return (
     <View style={{flex: 1}}>
       <ScrollView>
@@ -40,7 +41,6 @@ const Stats = () => {
   );
 }
 
-const receipts = 80;
 const tree = 7500;
 const water = 3;
 
@@ -79,4 +79,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Stats;
+const mapStateToProps = (state) => {
+  return {
+    receipts: state.receipts.length
+  };
+}
+
+export default connect(mapStateToProps)(Stats);

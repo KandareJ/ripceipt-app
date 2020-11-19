@@ -1,7 +1,7 @@
 export const LOGIN = 'LOGIN';
+export const ADD_RECEIPT = 'ADD_RECEIPT';
 
 export const login = (username, password) => {
-  console.log("login action")
   return {
     type: LOGIN,
     payload: {
@@ -9,4 +9,18 @@ export const login = (username, password) => {
       password
     }
   };
+}
+
+export const logout = () => {
+  return {
+    type: LOGIN,
+    payload: null
+  };
+}
+
+export const addReceipt = (receipt) => {
+  return {
+    type: ADD_RECEIPT,
+    payload: receipt
+  }
 }
