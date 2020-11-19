@@ -65,6 +65,10 @@
 		B60ECC3429221FEF4BE7E1A5 /* Pods-RipceiptApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RipceiptApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RipceiptApp-tvOS/Pods-RipceiptApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B8FCC0D52DF12910BB7B38D2 /* Pods-RipceiptApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RipceiptApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RipceiptApp-tvOSTests/Pods-RipceiptApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFEA43D659CF4874ADE7A8F5 /* Pods-RipceiptApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RipceiptApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RipceiptApp-tvOS/Pods-RipceiptApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		CA753FC82564B977009301ED /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		CA753FC92564B977009301ED /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		CA753FCA2564B977009301ED /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		CA753FCB2564B977009301ED /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -125,6 +129,7 @@
 		13B07FAE1A68108700A75B9A /* RipceiptApp */ = {
 			isa = PBXGroup;
 			children = (
+				CA753FC72564B901009301ED /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -161,7 +166,6 @@
 				B8FCC0D52DF12910BB7B38D2 /* Pods-RipceiptApp-tvOSTests.debug.xcconfig */,
 				0A88965438FEFEFFCEB61D32 /* Pods-RipceiptApp-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -204,7 +208,17 @@
 			children = (
 			);
 			name = Resources;
-			path = "";
+			sourceTree = "<group>";
+		};
+		CA753FC72564B901009301ED /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CA753FCB2564B977009301ED /* FontAwesome.ttf */,
+				CA753FCA2564B977009301ED /* FontAwesome5_Brands.ttf */,
+				CA753FC82564B977009301ED /* FontAwesome5_Regular.ttf */,
+				CA753FC92564B977009301ED /* FontAwesome5_Solid.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

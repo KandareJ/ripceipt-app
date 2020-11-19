@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import Navigation from './views/Navigation';
-import SignIn from './views/SignIn';
 import reducers from './reducers';
 
 const App = () => {

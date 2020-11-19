@@ -3,6 +3,7 @@ import { View, Text, Image } from 'react-native';
 import Animated, { Value, event, block, cond, eq, set, interpolate, Extrapolate, Clock } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
+import Form from './Form';
 import { height, styles } from './styles';
 import { runTiming } from './AnimationTiming';
 
@@ -85,7 +86,7 @@ export default class SignIn extends Component {
             </TapGestureHandler>
             <View style={styles.bottomViewComponentsPadding}>
               {/* This is where anything can be added in that should appear when the screen scrolls up */}
-                <Text>Hello?</Text>
+                <Form />
               {/* This is where anything can be added in that should appear when the screen scrolls up */}
             </View>
           </Animated.View>
