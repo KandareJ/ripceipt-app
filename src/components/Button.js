@@ -13,7 +13,6 @@ const Button = ({title, onPress}) => {
 
 const styles = StyleSheet.create({
   bg: {
-    marginTop: 7,
     backgroundColor: 'rgb(78,107,52)',
     justifyContent: 'center',
     alignItems: 'center',

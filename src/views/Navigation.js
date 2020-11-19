@@ -7,7 +7,6 @@ import Home from './Home';
 import Scanning from './Scanning';
 import Stats from './Stats';
 import Settings from './Settings';
-import Topbar from '../components/Topbar';
 import SignIn from './SignIn';
 
 const Tab = createBottomTabNavigator();
@@ -15,9 +14,8 @@ const Tab = createBottomTabNavigator();
 const Navigation = ({ login }) => {
   if (login !== null) {
     return (
-      <Topbar title='Ripceipt'>
       <Tab.Navigator
-      screenOptions={({ route }) => ({
+          screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let icon = '';
               if (route.name === "Home") icon = "home";
@@ -38,7 +36,6 @@ const Navigation = ({ login }) => {
         <Tab.Screen name="Stats" component={Stats} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
-      </Topbar>
     );
   }
   else {

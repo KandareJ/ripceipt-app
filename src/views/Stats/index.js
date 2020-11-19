@@ -2,42 +2,46 @@ import React from 'react';
 import { Text, View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 
+import Topbar from '../../components/Topbar';
+
 const Stats = ({ receipts }) => {
   return (
-    <View style={{flex: 1}}>
-      <ScrollView>
-      <View style={styles.card}>
-        <View style={styles.col}>
-          <ImageBackground source={require('../../../assets/img/receipt.png')} style={styles.receipt} />
+    <Topbar title='Stats'>
+      <View style={{flex: 1}}>
+        <ScrollView>
+        <View style={styles.card}>
+          <View style={styles.col}>
+            <ImageBackground source={require('../../../assets/img/receipt.png')} style={styles.receipt} />
+          </View>
+          <View style={styles.col}>
+            <Text style={styles.text}>You have {receipts} digital receipts saved!</Text>
+          </View>
         </View>
-        <View style={styles.col}>
-          <Text style={styles.text}>You have {receipts} digital receipts saved!</Text>
+        <View style={styles.card}>
+          <View style={styles.col}>
+            <ImageBackground source={require('../../../assets/img/tree.png')} style={styles.tree}>
+              <View style={{flex: tree-receipts%tree, backgroundColor: 'rgba(255,255,255,.7)'}}/>
+              <View style={{flex: receipts%tree}}/>
+            </ImageBackground>
+          </View>
+          <View style={styles.col}>
+            <Text style={styles.text}>You have saved a total of {(receipts/tree).toFixed(3)} trees!</Text>
+          </View>
         </View>
+        <View style={styles.card}>
+          <View style={styles.col}>
+            <ImageBackground source={require('../../../assets/img/water.png')} style={styles.water}>
+              <View style={{flex: water-receipts%water, backgroundColor: 'rgba(255,255,255,.7)'}}/>
+              <View style={{flex: receipts%water}}/>
+            </ImageBackground>
+          </View>
+          <View style={styles.col}>
+            <Text style={styles.text}>You have saved a total of {(receipts/water).toFixed(2)} gallons of water!</Text>
+          </View>
+        </View>
+        </ScrollView>
       </View>
-      <View style={styles.card}>
-        <View style={styles.col}>
-          <ImageBackground source={require('../../../assets/img/tree.png')} style={styles.tree}>
-            <View style={{flex: tree-receipts%tree, backgroundColor: 'rgba(255,255,255,.7)'}}/>
-            <View style={{flex: receipts%tree}}/>
-          </ImageBackground>
-        </View>
-        <View style={styles.col}>
-          <Text style={styles.text}>You have saved a total of {(receipts/tree).toFixed(3)} trees!</Text>
-        </View>
-      </View>
-      <View style={styles.card}>
-        <View style={styles.col}>
-          <ImageBackground source={require('../../../assets/img/water.png')} style={styles.water}>
-            <View style={{flex: water-receipts%water, backgroundColor: 'rgba(255,255,255,.7)'}}/>
-            <View style={{flex: receipts%water}}/>
-          </ImageBackground>
-        </View>
-        <View style={styles.col}>
-          <Text style={styles.text}>You have saved a total of {(receipts/water).toFixed(2)} gallons of water!</Text>
-        </View>
-      </View>
-      </ScrollView>
-    </View>
+    </Topbar>
   );
 }
 

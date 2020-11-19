@@ -3,18 +3,19 @@ import { Text, View, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 're
 import { connect } from 'react-redux';
 
 import Receipt from './Receipt';
+import Topbar from '../../components/Topbar';
 
 const { height, width } = Dimensions.get('window');
 
 const Home = ({ receipts }) => {
   return (
-    <SafeAreaView>
+    <Topbar title="Home">
       <View style={styles.fill}>
         <ScrollView horizontal={true} snapToInterval={width} decelerationRate="fast" snapToAlignment="end" style={styles.scroll}>
           {body(receipts)}
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </Topbar>
   );
 }
 
@@ -26,7 +27,7 @@ const body = (receipts) => {
       </View>
     );
   }
-  
+
   else {
     return receipts.map((x, i) => {
       return (
