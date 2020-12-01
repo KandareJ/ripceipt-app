@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { LOGIN, ADD_RECEIPT } from '../actions';
+import { LOGIN, ADD_RECEIPT, SET_VIEW, FILTER } from '../actions';
 
 const login = (last=null, action) => {
   if (action.type === LOGIN) {
@@ -12,19 +12,40 @@ const login = (last=null, action) => {
 
 const receipts = (last=[
   {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
+    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
+    store: 'Zalmart',
+    price: 5.21,
+    timestamp: Date.now() - 120000000
   },
   {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
-  },
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg'
+    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
+    store: 'Almart',
+    price: 98.21,
+    timestamp: Date.now()
   }
 ], action) => {
   return last;
 }
 
+const view = (last='Card', action) => {
+  if (action.type === SET_VIEW) {
+    return action.payload;
+  }
+
+  return last;
+}
+
+const filter = (last='DateNO', action) => {
+  if (action.type === FILTER) {
+    return action.payload
+  }
+
+  return last
+}
+
 export default combineReducers({
   login,
-  receipts
+  receipts,
+  view,
+  filter
 });

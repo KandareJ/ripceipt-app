@@ -3,42 +3,87 @@ import { Text, View, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 're
 import { connect } from 'react-redux';
 
 import Receipt from './Receipt';
-import Topbar from '../../components/Topbar';
+import ListItem from './ListItem';
+import SpecialTopbar from '../../components/SpecialTopbar';
 
 const { height, width } = Dimensions.get('window');
 
-const Home = ({ receipts }) => {
+const Home = ({ receipts, view, filter }) => {
+  let filtered = filterReceipts(receipts, filter);
+
   return (
-    <Topbar title="Home">
+    <SpecialTopbar title="Home">
       <View style={styles.fill}>
-        <ScrollView horizontal={true} snapToInterval={width} decelerationRate="fast" snapToAlignment="end" style={styles.scroll}>
-          {body(receipts)}
-        </ScrollView>
+        {body(receipts, view)}
       </View>
-    </Topbar>
+    </SpecialTopbar>
   );
 }
 
-const body = (receipts) => {
+const body = (receipts, view) => {
   if (receipts.length === 0) {
     return (
-      <View style={{justifyContent: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>You have no receipts to show</Text>
       </View>
     );
   }
 
+  else if (view === 'Card') {
+    return (
+      <ScrollView horizontal={true} snapToInterval={width} decelerationRate="fast" snapToAlignment="end">
+        {receipts.map((x, i) => {
+          return (
+            <View style={{justifyContent: 'center'}} key={i}>
+              <View style={styles.listItem}>
+                <Receipt receipt={x} />
+              </View>
+            </View>
+          );
+        })}
+      </ScrollView>
+    );
+  }
   else {
-    return receipts.map((x, i) => {
-      return (
-        <View style={{justifyContent: 'center'}} key={i}>
-          <View style={styles.listItem}>
-            <Receipt receipt={x} />
-          </View>
-        </View>
-      );
+    return (
+      <ScrollView style={styles.scroll}>
+        {receipts.map((x, i) => {
+          return (
+            <ListItem receipt={x} key={i + x.source} />
+          );
+        })}
+      </ScrollView>
+    );
+  }
+}
+
+const filterReceipts = (receipts, filter) => {
+  if (filter === 'DateON') {
+    return receipts.sort((a, b) => {
+      return a.timestamp > b.timestamp
     });
   }
+  else if (filter === 'DateNO') {
+    return receipts.sort((a, b) => {
+      return a.timestamp < b.timestamp
+    });
+  }
+  else if (filter === 'Store') {
+    return receipts.sort((a, b) => {
+      return a.store > b.store
+    });
+  }
+  else if (filter === 'AmountHL') {
+    return receipts.sort((a, b) => {
+      return a.price < b.price
+    });
+  }
+  else if (filter === 'AmountLH') {
+    return receipts.sort((a, b) => {
+      return a.price > b.price
+    });
+  }
+  else return receipts;
 }
 
 const styles = StyleSheet.create({
@@ -53,12 +98,15 @@ const styles = StyleSheet.create({
       alignItems: 'center'
   },
   scroll: {
+    width: '100%'
   }
 });
 
 const mapStateToProps = (state) => {
   return {
-    receipts: state.receipts
+    receipts: state.receipts,
+    view: state.view,
+    filter: state.filter
   };
 }
 

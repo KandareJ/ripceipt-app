@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
+
 import { styles } from './styles';
 
 const Topbar = ({title, children}) => {
