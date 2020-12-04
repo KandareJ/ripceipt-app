@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, Button as Btn } from 'react-native';
 import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../../components/Button';
 import { login } from '../../actions';
@@ -8,28 +9,89 @@ import { login } from '../../actions';
 const Form = ({ login }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [errorText, setErrorText] = React.useState('');
+  const [view, setView] = React.useState('login')
 
-  return (
-    <View style={styles.bg}>
-      <View style={styles.inputView}>
-        <Text style={styles.label}>Username:</Text>
-        <View style={styles.input}>
-          <TextInput style={styles.inputText} value={username} onChangeText={text => setUsername(text)} textContentType="username"/>
+  const authorize = async () => {
+    let savedPassword = await AsyncStorage.getItem(`USER:${username}`);
+    if (savedPassword === password) login(username, password);
+    else setErrorText('Username and password do not match.');
+  };
+
+  const register = async () => {
+    let notAvailable = await AsyncStorage.getItem(`USER:${username}`);
+    if (notAvailable) setErrorText('Username already taken.')
+    else if (password !== confirmPassword) setErrorText(`Passwords don't match`);
+    else {
+      await AsyncStorage.setItem(`USER:${username}`, password);
+      login(username, password);
+    }
+  }
+
+  if (view === 'login') {
+    return (
+      <View style={styles.bg}>
+        <View style={styles.inputView}>
+          <Text style={styles.label}>Username:</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.inputText} value={username} onChangeText={text => setUsername(text)} textContentType="username"/>
+          </View>
+        </View>
+
+        <View style={styles.inputView}>
+          <Text style={styles.label}>Password:</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.inputText} value={password} secureTextEntry={true} onChangeText={text => setPassword(text)} textContentType="password"/>
+          </View>
+        </View>
+
+        <View style={styles.errorTextView}>
+          <Text style={styles.errorText}>{errorText}</Text>
+        </View>
+
+        <View style={styles.button}>
+          <Btn title='Sign Up' color='rgb(78,107,52)' onPress={() => {setView('signup'); setErrorText('');}}/>
+          <Button title='Sign In' onPress={() => { if (username && password) authorize(); else setErrorText('Please fill in all fields.') }}/>
         </View>
       </View>
+    );
+  }
+  else {
+    return (
+      <View style={styles.bg}>
+        <View style={styles.inputView2}>
+          <Text style={styles.label}>Username:</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.inputText} value={username} onChangeText={text => setUsername(text)} textContentType="username"/>
+          </View>
+        </View>
 
-      <View style={styles.inputView}>
-        <Text style={styles.label}>Password:</Text>
-        <View style={styles.input}>
-          <TextInput style={styles.inputText} value={password} secureTextEntry={true} onChangeText={text => setPassword(text)} textContentType="password"/>
+        <View style={styles.inputView2}>
+          <Text style={styles.label}>Password:</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.inputText} value={password} secureTextEntry={true} onChangeText={text => setPassword(text)} textContentType="password"/>
+          </View>
+        </View>
+
+        <View style={styles.inputView2}>
+          <Text style={styles.label}>Confirm Password:</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.inputText} value={confirmPassword} secureTextEntry={true} onChangeText={text => setConfirmPassword(text)} textContentType="password"/>
+          </View>
+        </View>
+
+        <View style={styles.errorTextView}>
+          <Text style={styles.errorText}>{errorText}</Text>
+        </View>
+
+        <View style={styles.button2}>
+          <Btn title='Sign In' color='rgb(78,107,52)' onPress={() => {setView('login'); setErrorText('');}}/>
+          <Button title='Sign Up' onPress={() => { if (username && password && confirmPassword) register(); else setErrorText('Please fill in all fields.') }}/>
         </View>
       </View>
-
-      <View style={styles.button}>
-        <Button title='Sign In' onPress={() => { if (username && password) login(username, password); }}/>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -40,13 +102,24 @@ const styles = StyleSheet.create({
   inputView: {
     marginTop: 25,
   },
+  inputView2: {
+    marginTop: 10,
+  },
   label: {
     marginBottom: 3,
     fontSize: 15
   },
   button: {
     marginTop: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  button2: {
+    marginTop: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   input: {
     backgroundColor: 'white',
@@ -61,6 +134,12 @@ const styles = StyleSheet.create({
   inputText: {
     fontSize: 20,
     marginHorizontal: 7
+  },
+  errorTextView: {
+    marginTop: 5
+  },
+  errorText: {
+    color: 'red'
   }
 });
 

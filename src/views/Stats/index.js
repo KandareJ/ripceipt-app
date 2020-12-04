@@ -20,7 +20,7 @@ const Stats = ({ receipts }) => {
         <View style={styles.card}>
           <View style={styles.col}>
             <ImageBackground source={require('../../../assets/img/tree.png')} style={styles.tree}>
-              <View style={{flex: tree-receipts%tree, backgroundColor: 'rgba(255,255,255,.7)'}}/>
+              <View style={{flex: tree-receipts%tree, backgroundColor: 'rgba(255,255,255,.8)'}}/>
               <View style={{flex: receipts%tree}}/>
             </ImageBackground>
           </View>
@@ -31,7 +31,7 @@ const Stats = ({ receipts }) => {
         <View style={styles.card}>
           <View style={styles.col}>
             <ImageBackground source={require('../../../assets/img/water.png')} style={styles.water}>
-              <View style={{flex: water-receipts%water, backgroundColor: 'rgba(255,255,255,.7)'}}/>
+              <View style={{flex: water-receipts%water, backgroundColor: 'rgba(255,255,255,.8)'}}/>
               <View style={{flex: receipts%water}}/>
             </ImageBackground>
           </View>
