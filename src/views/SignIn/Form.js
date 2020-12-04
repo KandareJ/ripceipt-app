@@ -15,7 +15,10 @@ const Form = ({ login }) => {
 
   const authorize = async () => {
     let savedPassword = await AsyncStorage.getItem(`USER:${username}`);
-    if (savedPassword === password) login(username, password);
+    if (savedPassword === password) {
+    let receipts = await AsyncStorage.getItem(`${username}:RECEIPTS`);
+      login(username, password, JSON.parse(receipts));
+    }
     else setErrorText('Username and password do not match.');
   };
 
@@ -25,6 +28,7 @@ const Form = ({ login }) => {
     else if (password !== confirmPassword) setErrorText(`Passwords don't match`);
     else {
       await AsyncStorage.setItem(`USER:${username}`, password);
+      await AsyncStorage.setItem(`${username}:RECEIPTS`, JSON.stringify([]));
       login(username, password);
     }
   }
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
   },
   inputView: {
-    marginTop: 25,
+    marginTop: 10,
   },
   inputView2: {
     marginTop: 10,
@@ -123,7 +127,6 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'white',
-    height: 35,
     borderRadius: 10,
     justifyContent: 'center',
     shadowColor: 'black',
@@ -133,7 +136,8 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 20,
-    marginHorizontal: 7
+    marginHorizontal: 7,
+    paddingVertical: 3
   },
   errorTextView: {
     marginTop: 5

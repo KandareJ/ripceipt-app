@@ -3,12 +3,13 @@ export const ADD_RECEIPT = 'ADD_RECEIPT';
 export const SET_VIEW = 'SET_VIEW';
 export const FILTER = 'FILTER'
 
-export const login = (username, password) => {
+export const login = (username, password, receipts) => {
   return {
     type: LOGIN,
     payload: {
       username,
-      password
+      password,
+      receipts
     }
   };
 }

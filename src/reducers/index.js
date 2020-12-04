@@ -4,26 +4,19 @@ import { LOGIN, ADD_RECEIPT, SET_VIEW, FILTER } from '../actions';
 
 const login = (last=null, action) => {
   if (action.type === LOGIN) {
-    return action.payload;
+    return {
+      username: action.payload.username,
+      password: action.payload.password
+    }
   }
 
   return last;
 }
 
-const receipts = (last=[
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
-    store: 'Zalmart',
-    price: 5.21,
-    timestamp: Date.now() - 120000000
-  },
-  {
-    source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
-    store: 'Almart',
-    price: 98.21,
-    timestamp: Date.now()
+const receipts = (last=[], action) => {
+  if (action.type === LOGIN) {
+    return action.payload.receipts;
   }
-], action) => {
   return last;
 }
 
@@ -49,3 +42,18 @@ export default combineReducers({
   view,
   filter
 });
+
+/*
+{
+  source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
+  store: 'Zalmart',
+  price: 5.21,
+  timestamp: Date.now() - 120000000
+},
+{
+  source: 'https://ocr.space/Content/Images/receipt-ocr-original.jpg',
+  store: 'Almart',
+  price: 98.21,
+  timestamp: Date.now()
+}
+*/
