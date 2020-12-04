@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-export const height = Dimensions.get('window').height / 2;
+export const height = Dimensions.get('window').height / 3;
 export const { width } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({

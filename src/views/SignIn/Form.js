@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
   },
   inputView: {
-    marginTop: 10,
+    marginTop: 25,
   },
   inputView2: {
     marginTop: 10,
