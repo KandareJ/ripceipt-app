@@ -11,12 +11,24 @@ const Form = ({ login }) => {
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [errorText, setErrorText] = React.useState('');
-  const [view, setView] = React.useState('login')
+  const [view, setView] = React.useState('login');
+
+  React.useEffect(() => {
+    loadLoginOption();
+  }, []);
+
+  const loadLoginOption = async () => {
+    let signedIn = await AsyncStorage.getItem(`SIGNEDIN:USER`);
+    if (signedIn) {
+      let receipts = await AsyncStorage.getItem(`${signedIn}:RECEIPTS`);
+      login(signedIn, 'saved', JSON.parse(receipts));
+    }
+  };
 
   const authorize = async () => {
     let savedPassword = await AsyncStorage.getItem(`USER:${username}`);
     if (savedPassword === password) {
-    let receipts = await AsyncStorage.getItem(`${username}:RECEIPTS`);
+      let receipts = await AsyncStorage.getItem(`${username}:RECEIPTS`);
       login(username, password, JSON.parse(receipts));
     }
     else setErrorText('Username and password do not match.');
@@ -29,7 +41,7 @@ const Form = ({ login }) => {
     else {
       await AsyncStorage.setItem(`USER:${username}`, password);
       await AsyncStorage.setItem(`${username}:RECEIPTS`, JSON.stringify([]));
-      login(username, password);
+      login(username, password, []);
     }
   }
 
@@ -101,7 +113,10 @@ const Form = ({ login }) => {
 const styles = StyleSheet.create({
   bg: {
     justifyContent: 'center',
-    marginHorizontal: 40,
+    paddingHorizontal: 40,
+    backgroundColor: '#ebecf0',
+    width: '100%',
+    height: '100%'
   },
   inputView: {
     marginTop: 25,

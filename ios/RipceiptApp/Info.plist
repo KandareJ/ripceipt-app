@@ -57,5 +57,11 @@
 	<array>
 		<string>FontAwesome.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow Ripeceipt access to camera to scan QR codes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow Ripeceipt access to camera to scan QR codes</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow Ripeceipt access to camera to scan QR codes</string>
 </dict>
 </plist>

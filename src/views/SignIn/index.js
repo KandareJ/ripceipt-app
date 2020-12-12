@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import Animated, { Value, event, block, cond, eq, set, interpolate, Extrapolate, Clock } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
@@ -67,7 +67,8 @@ export default class SignIn extends Component {
 
   render() {
     return(
-      <View style={styles.bgView}>
+
+      <KeyboardAvoidingView behavior="padding" style={styles.bgView}>
         <Animated.View style={{...styles.absoluteFill, transform: [{translateY: this.bgY}] }}>
           <Image style={styles.bgImage} source={require('../../../assets/img/Forests.jpeg')} />
         </Animated.View>
@@ -91,7 +92,7 @@ export default class SignIn extends Component {
             </View>
           </Animated.View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 };

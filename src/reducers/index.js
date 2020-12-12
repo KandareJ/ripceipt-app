@@ -4,18 +4,18 @@ import { LOGIN, ADD_RECEIPT, SET_VIEW, FILTER } from '../actions';
 
 const login = (last=null, action) => {
   if (action.type === LOGIN) {
-    return {
-      username: action.payload.username,
-      password: action.payload.password
-    }
+    return action.payload
   }
 
   return last;
 }
 
 const receipts = (last=[], action) => {
-  if (action.type === LOGIN) {
+  if (action.type === LOGIN && action.payload) {
     return action.payload.receipts;
+  }
+  if (action.type === ADD_RECEIPT) {
+    return action.payload;
   }
   return last;
 }
